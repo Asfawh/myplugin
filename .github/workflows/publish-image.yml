@@ -23,4 +23,4 @@ jobs:
 
         # Build and push the Docker image with the specified tag
         docker login -u habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
-        docker push habtamu/myplugin:${DOCKER_TAG} .
+        docker push habtamu/myplugin:${DOCKER_TAG}
