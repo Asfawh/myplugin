@@ -26,8 +26,8 @@ jobs:
 
         # Build and push the Docker image with the specified tag
         docker buildx create --use
-        docker buildx build --platform linux/amd64,linux/arm64 -t docker.io/habtamu/myplugin:${DOCKER_TAG} .
+        docker buildx build --platform linux/amd64,linux/arm64 -t habtamu/myplugin:${DOCKER_TAG} .
 
         # Build and push the Docker image with the specified tag
         docker login -u habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
-        docker push docker.io/habtamu/myplugin:${DOCKER_TAG}
+        docker push habtamu/myplugin:${DOCKER_TAG}
