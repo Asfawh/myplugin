@@ -13,5 +13,5 @@ jobs:
          docker build . -t habtamu/myplugin:0.2
     - name: publish
       run: |
-         docker login - habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
+         docker login -u habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
          docker push habtamu/myplugin:0.2
