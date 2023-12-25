@@ -1,0 +1,17 @@
+name: Docker Build and Push Image to Dockerhub
+
+on:
+  [workflow_dispatch]
+
+jobs:
+  publish_image:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: |
+         docker build . -t habtamu/myplugin:0.2
+    - name: publish
+      run: |
+         docker push habtamu/myplugin:0.2
+
