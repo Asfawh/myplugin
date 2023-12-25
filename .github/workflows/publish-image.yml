@@ -1,17 +1,27 @@
-name: Docker Build and Push Image to Dockerhub
+name: Docker Build and Publish
 
 on:
-  [workflow_dispatch]
+  push:
+    branches:
+      - main
 
 jobs:
-  publish_image:
+  build-and-publish:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+    - name: Build and push Docker image
       run: |
-         docker build . -t habtamu/myplugin:0.2
-    - name: publish
-      run: |
-         docker login -u habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
-         docker push habtamu/myplugin:0.2
+        # Set the date and timestamp variables
+        DATE=$(date +"%Y-%m-%d")
+        TIMESTAMP=$(date +"%H%M%S")
+        
+        # Set the Docker tag with the desired format
+        DOCKER_TAG="${DATE}-${TIMESTAMP}"
+
+        # Build and push the Docker image with the specified tag
+        docker login -u habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
+        docker push habtamu/myplugin:${DOCKER_TAG} .
