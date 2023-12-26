@@ -21,3 +21,6 @@ jobs:
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag habtamu/myplugin:$(date +%s)
+
+    - name: Push the Docker image with the specified tag
+      run: docker push habtamu/myplugin:$(date +%s)
