@@ -39,4 +39,5 @@ jobs:
         docker buildx build --platform linux/amd64,linux/arm64 -t habtamu/myplugin:${DOCKER_TAG} .
 
     - name: Publish the Docker image with the specified tag
-      run: docker image push
+      run: |
+        docker image push -a habtamu/myplugin:${DOCKER_TAG} .
