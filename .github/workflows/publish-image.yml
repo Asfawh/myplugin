@@ -27,6 +27,8 @@ jobs:
         
         # Set the Docker tag with the desired format
         DOCKER_TAG="${DATE}-${TIMESTAMP}"
+        
+        docker image tag myplugin habtamu/myplugin:${DOCKER_TAG}
 
         # Build the Docker image
         docker buildx create --use
