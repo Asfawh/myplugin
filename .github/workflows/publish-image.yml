@@ -5,6 +5,15 @@ on:
     branches:
       - main
 
+- name: build image
+  id: build-image
+  uses: redhat-actions/buildah-build@v2
+  with:
+    image: myuser/myimage
+    tags: latest
+    dockerfiles: |
+      ./Dockerfile
+
 jobs:
   publish_image:
     runs-on: ubuntu-latest
@@ -14,6 +23,10 @@ jobs:
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
+
+    - name: docker login
+      run: |
+        docker login -u habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
 
     - name: Build and push Docker image
       run: |
@@ -29,5 +42,4 @@ jobs:
         docker buildx build --platform linux/amd64,linux/arm64 -t habtamu/myplugin:${DOCKER_TAG} .
 
         # Build and push the Docker image with the specified tag
-        docker login -u habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
         docker push habtamu/myplugin:${DOCKER_TAG}
