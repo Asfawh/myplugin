@@ -21,7 +21,7 @@ jobs:
 
     - name: Pull an image from Docker Hub
       run: |
-        docker image pull habtamu/myplugin
+        docker image pull habtamu/myplugin:latest
 
     - name: Tag and Build the Docker image
       run: |
