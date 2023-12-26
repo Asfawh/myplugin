@@ -40,4 +40,4 @@ jobs:
 
     - name: Publish the Docker image with the specified tag
       run: |
-        docker image push -a habtamu/myplugin:${DOCKER_TAG} .
+        docker image push -a habtamu/myplugin
