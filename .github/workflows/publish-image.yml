@@ -30,6 +30,8 @@ jobs:
         
         docker image tag habtamu/myplugin habtamu/myplugin:${DOCKER_TAG}
 
+        docker image pull habtamu/myplugin
+
         # Build the Docker image
         docker buildx create --use
         docker buildx build --platform linux/amd64,linux/arm64 -t habtamu/myplugin:${DOCKER_TAG} .
