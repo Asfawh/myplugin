@@ -27,7 +27,7 @@ jobs:
         
         # Set the Docker tag with the desired format
         DOCKER_TAG="${DATE}-${TIMESTAMP}"
-        docker build . --file Dockerfile --tag habtamu/myplugin:${DOCKER_TAG} .
+        docker buildx build -file Dockerfile --tag habtamu/myplugin:${DOCKER_TAG} .
 
     - name: Push the Docker image with the specified tag
       run: docker push habtamu/myplugin:${DOCKER_TAG}
