@@ -19,8 +19,15 @@ jobs:
       run: |
         docker login -u habtamu -p ${{ secrets.DOCKER_HUB_TOKEN }}
 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag habtamu/myplugin:$(date +%s)
+    - name: Tag and Build the Docker image
+      run: |
+        # Set the date and timestamp variables
+        DATE=$(date +"%Y-%m-%d")
+        TIMESTAMP=$(date +"%H%M%S")
+        
+        # Set the Docker tag with the desired format
+        DOCKER_TAG="${DATE}-${TIMESTAMP}"
+        docker build . --file Dockerfile --tag habtamu/myplugin:${DOCKER_TAG} .
 
     - name: Push the Docker image with the specified tag
-      run: docker push habtamu/myplugin:$(date +%s)
+      run: docker push habtamu/myplugin:${DOCKER_TAG}
